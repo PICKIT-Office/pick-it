@@ -72,11 +72,14 @@
                 }
             }
             input[type=text] {
-                margin: 10px 5px;
+                padding: 15px 7px;
                 width: 22rem;
                 border: none;
                 font-size: 14px;
                 font-family: 'p_bold';
+                &:focus {
+                    background-color: #f7f6fd;
+                }
             }
 
             button {
