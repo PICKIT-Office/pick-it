@@ -1,9 +1,9 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
-import { ApexOptions } from "apexcharts";
-import { useQuery } from "@tanstack/react-query";
-import { ICharts } from "../../../types/Banner";
-import { dashboardPopSearch } from "../../../server/readStore";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+import { useQuery } from '@tanstack/react-query';
+import { ICharts } from '../../../types/Banner';
+import { dashboardPopSearch } from '../../../server/readStore';
 
 function SearchChart() {
   //리액트 쿼리
@@ -12,12 +12,12 @@ function SearchChart() {
     status,
     error,
   } = useQuery<string[]>({
-    queryKey: ["searchChartApi"],
+    queryKey: ['searchChartApi'],
     queryFn: dashboardPopSearch,
   });
 
   //리액트 쿼리 요청이 완료되면 컴포넌트를 리턴
-  if (status === "success" && !error && searchData) {
+  if (status === 'success' && !error && searchData) {
     //reduce메소드를 사용하여 배열 순회하여 새로운 배열을 반환
     const wordCounts: ICharts[] = searchData
       .reduce<ICharts[]>((acc, word) => {
@@ -41,9 +41,9 @@ function SearchChart() {
     //ApexChart옵션 및 시리즈 상수 선언
     const option: ApexOptions = {
       chart: {
-        fontFamily: "p_bold",
+        fontFamily: 'p_bold',
         offsetY: 0,
-        type: "bar" as "bar",
+        type: 'bar' as 'bar',
         zoom: {
           enabled: false,
         },
@@ -56,10 +56,10 @@ function SearchChart() {
           borderRadius: 2,
           horizontal: true,
           distributed: true,
-          barHeight: "70%",
+          barHeight: '70%',
         },
       },
-      colors: ["#000"],
+      colors: ['#000'],
       dataLabels: {
         enabled: false,
       },
@@ -68,7 +68,7 @@ function SearchChart() {
       },
       grid: {
         show: true,
-        borderColor: "#c8c8c8",
+        borderColor: '#c8c8c8',
       },
       xaxis: {
         //카테고리: wordCount데이터의 검색어
@@ -97,7 +97,7 @@ function SearchChart() {
       tooltip: {
         y: {
           formatter: function (val: number) {
-            return val + "회";
+            return val + '회';
           },
         },
       },
@@ -106,27 +106,19 @@ function SearchChart() {
     const series = [
       //차트: wordCount데이터의 검색 횟수
       {
-        name: "검색 횟수",
+        name: '검색 횟수',
         data: wordCounts.map((data) => {
           return data.count;
         }),
       },
     ];
 
-    return (
-      <ReactApexChart
-        type="bar"
-        options={option}
-        series={series}
-        width={"120%"}
-        height={320}
-      />
-    );
+    return <ReactApexChart type='bar' options={option} series={series} width={'120%'} height={320} />;
   } else {
     return (
-      <div className="chart-loading">
+      <div className='chart-loading'>
         <h2>데이터를 불러오는 중입니다...</h2>
-        <div className="loading-spiner">
+        <div className='loading-spiner'>
           <hr />
           <div />
         </div>

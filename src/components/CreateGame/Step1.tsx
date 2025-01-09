@@ -1,8 +1,8 @@
-import React from "react";
-import { useAppDispatch } from "../../hooks/redux";
-import { useForm } from "react-hook-form";
-import { scrollStep2, updateStep1 } from "../../store/worldcup/createWorldcup";
-import { step1DataType } from "../../types/Worldcup";
+import React from 'react';
+import { useAppDispatch } from '../../hooks/redux';
+import { useForm } from 'react-hook-form';
+import { scrollStep2, updateStep1 } from '../../store/worldcup/createWorldcup';
+import { step1DataType } from '../../types/Worldcup';
 
 function Step1() {
   //redux dispatch 요청 메소드
@@ -14,7 +14,7 @@ function Step1() {
     register,
     formState: { errors },
   } = useForm<step1DataType>({
-    mode: "onSubmit",
+    mode: 'onSubmit',
   });
   /* step1 입력 데이터 redux 저장 */
   const step1Valid = (data: step1DataType) => {
@@ -37,32 +37,26 @@ function Step1() {
           type='text'
           autoComplete='off'
           placeholder='제목을 입력해주세요.'
-          {...register("worldCupTitle", {
+          {...register('worldCupTitle', {
             required: true,
             validate: {
-              min: (value: string) =>
-                value.length >= 6 ||
-                "월드컵 제목은 6글자 이상 입력하셔야 합니다.",
-              max: (value: string) =>
-                value.length <= 25 ||
-                "월드컵 제목은 25글자 이하까지 입력 가능합니다.",
+              min: (value: string) => value.length >= 6 || '월드컵 제목은 6글자 이상 입력하셔야 합니다.',
+              max: (value: string) => value.length <= 25 || '월드컵 제목은 25글자 이하까지 입력 가능합니다.',
             },
           })}
         />
-        <p className="step-error-message">{errors.worldCupTitle && errors.worldCupTitle.message}</p>
+        <p className='step-error-message'>{errors.worldCupTitle && errors.worldCupTitle.message}</p>
         <textarea
           autoComplete='off'
           placeholder='월드컵을 설명하는 내용을 입력해주세요.'
-          {...register("worldcupDescription", {
+          {...register('worldcupDescription', {
             required: false,
             validate: {
-              max: (value: string) =>
-                value.length <= 50 ||
-                "월드컵 설명은 50글자 이하까지 입력 가능합니다.",
+              max: (value: string) => value.length <= 50 || '월드컵 설명은 50글자 이하까지 입력 가능합니다.',
             },
           })}
         />
-        <p className="step-error-message">{errors.worldcupDescription && errors.worldcupDescription.message}</p>
+        <p className='step-error-message'>{errors.worldcupDescription && errors.worldcupDescription.message}</p>
         <button className='next-step-button' type='submit'>
           다음 단계로
         </button>

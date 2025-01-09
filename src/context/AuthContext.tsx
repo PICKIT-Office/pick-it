@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../server/firebase";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { auth } from '../server/firebase';
 
 //파이어베이스 로그인 Context API 코드
 const Context = createContext({});
@@ -28,9 +28,7 @@ const AuthProvider = ({ children }: any) => {
     });
   }, []);
 
-  return (
-    <Context.Provider value={{ user, setUser }}>{children}</Context.Provider>
-  );
+  return <Context.Provider value={{ user, setUser }}>{children}</Context.Provider>;
 };
 
 export const AuthContext = () => useContext(Context);

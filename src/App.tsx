@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
-import Home from "./pages/Home";
-import "../src/assets/global.scss";
-import "./assets/userPopup/userPopup.scss";
-import CreateGame from "./pages/CreateGame";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import { AuthContext } from "./context/AuthContext";
-import Contents from "./pages/Contents";
-import UserPopup from "./components/UserPopup/UserPopup";
-import { PopupContext } from "./context/PopupContext";
-import { LocalUserData, PopupUserData } from "./types/Sign";
-import FindUser from "./pages/FindUser";
-import PlayGame from "./pages/PlayGame";
-import GameReview from "./pages/GameReview";
-import HeaderDisplay from "./components/Header/HeaderDisplay";
-import MyPage from "./pages/MyPage";
-import EditProfile from "./pages/EditProfile";
-import EditWorldcup from "./pages/EditWorldcup";
-import NoticePage from "./pages/NoticePage";
-import Community from "./pages/Community";
-import ScrollToTop from "./context/ScrollTop";
-import { getUserData } from "./server/readStore";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import '../src/assets/global.scss';
+import './assets/userPopup/userPopup.scss';
+import CreateGame from './pages/CreateGame';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { AuthContext } from './context/AuthContext';
+import Contents from './pages/Contents';
+import UserPopup from './components/UserPopup/UserPopup';
+import { PopupContext } from './context/PopupContext';
+import { LocalUserData, PopupUserData } from './types/Sign';
+import FindUser from './pages/FindUser';
+import PlayGame from './pages/PlayGame';
+import GameReview from './pages/GameReview';
+import HeaderDisplay from './components/Header/HeaderDisplay';
+import MyPage from './pages/MyPage';
+import EditProfile from './pages/EditProfile';
+import EditWorldcup from './pages/EditWorldcup';
+import NoticePage from './pages/NoticePage';
+import Community from './pages/Community';
+import ScrollToTop from './context/ScrollTop';
+import { getUserData } from './server/readStore';
 
 function App() {
   const [userData, setUserData] = useState<PopupUserData>({
-    nickName: "",
-    imgUrl: "",
+    nickName: '',
+    imgUrl: '',
   });
 
   //로그인 여부 확인
@@ -34,22 +34,20 @@ function App() {
   if (user.isLogin) {
     localStorage.setItem(
       //로컬 스토리지 등록
-      "pickit-user",
+      'pickit-user',
       JSON.stringify({
         LoginToken: user.user.uid,
         UserId: String(user.user.email).slice(
           0,
-          String(user.user.email).indexOf("@") //이메일 도메인 제거
+          String(user.user.email).indexOf('@'), //이메일 도메인 제거
         ),
-      })
+      }),
     );
   }
 
-  const localUser: string | null = localStorage.getItem("pickit-user");
+  const localUser: string | null = localStorage.getItem('pickit-user');
   // 객체 문자열을 json 객체로 파싱
-  const localDataParse: LocalUserData = localUser
-    ? JSON.parse(localUser)
-    : null;
+  const localDataParse: LocalUserData = localUser ? JSON.parse(localUser) : null;
 
   const { userPopupToggle } = PopupContext();
 
@@ -73,11 +71,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ScrollToTop/>
-      <HeaderDisplay/>
-      {localUser && userPopupToggle ? (
-        <UserPopup userData={userData} />
-      ) : null}
+      <ScrollToTop />
+      <HeaderDisplay />
+      {localUser && userPopupToggle ? <UserPopup userData={userData} /> : null}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/pop-category/:id' element={<Home />} />
@@ -91,8 +87,8 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/find-user' element={<FindUser />} />
         <Route path='/mypage' element={<MyPage />} />
-        <Route path='/edit-profile' element={<EditProfile/>}/>
-        <Route path='/game-edit/:id' element={<EditWorldcup/>}/>
+        <Route path='/edit-profile' element={<EditProfile />} />
+        <Route path='/game-edit/:id' element={<EditWorldcup />} />
       </Routes>
     </BrowserRouter>
   );

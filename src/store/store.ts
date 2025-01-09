@@ -1,6 +1,6 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import createWorldcup from "./worldcup/createWorldcup";
-import popCategory from "./worldcup/popCategory";
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import createWorldcup from './worldcup/createWorldcup';
+import popCategory from './worldcup/popCategory';
 
 //월드컵 생성
 const createWorldcupReducers = combineReducers({
