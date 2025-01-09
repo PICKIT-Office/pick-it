@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import ReactApexChart from "react-apexcharts";
-import { ApexOptions } from "apexcharts";
-import { useQuery } from "@tanstack/react-query";
-import { ICharts } from "../../../types/Banner";
-import { useAppDispatch } from "../../../hooks/redux";
-import { updateCategory } from "../../../store/worldcup/popCategory";
-import { categoryCounts } from "../../../Utils/categoryCounts";
-import { dashboardPopCategory } from "../../../server/readStore";
+import React, { useEffect } from 'react';
+import ReactApexChart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+import { useQuery } from '@tanstack/react-query';
+import { useAppDispatch } from '../../../hooks/redux';
+import { updateCategory } from '../../../store/worldcup/popCategory';
+import { categoryCounts } from '../../../Utils/categoryCounts';
+import { dashboardPopCategory } from '../../../server/readStore';
 
 function CategoryChart() {
   //redux dispatch 요청 메소드
@@ -17,26 +16,26 @@ function CategoryChart() {
     status,
     error,
   } = useQuery({
-    queryKey: ["categoryChartApi"],
+    queryKey: ['categoryChartApi'],
     queryFn: dashboardPopCategory,
   });
   //컴포넌트 렌더링 이후에 전역 상태 업데이트
   useEffect(() => {
-    if (status === "success" && !error && categoryData) {
+    if (status === 'success' && !error && categoryData) {
       //인기카테고리 reducer업데이트
       dispatch(updateCategory(categoryData));
     }
   }, [categoryData]);
   //리액트 쿼리 요청이 완료되면 컴포넌트를 리턴
-  if (status === "success" && !error && categoryData) {
+  if (status === 'success' && !error && categoryData) {
     const categoryCountArray = categoryCounts(categoryData).slice(0, 7);
-    
+
     //ApexChart옵션 및 시리즈 상수 선언
     const option: ApexOptions = {
       chart: {
-        fontFamily: "p_bold",
+        fontFamily: 'p_bold',
         offsetY: 0,
-        type: "bar" as "bar",
+        type: 'bar' as 'bar',
         zoom: {
           enabled: false,
         },
@@ -49,10 +48,10 @@ function CategoryChart() {
           borderRadius: 2,
           horizontal: true,
           distributed: true,
-          barHeight: "70%",
+          barHeight: '70%',
         },
       },
-      colors: ["#000"],
+      colors: ['#000'],
       dataLabels: {
         enabled: true,
       },
@@ -60,7 +59,7 @@ function CategoryChart() {
         show: false,
       },
       grid: {
-        borderColor: "#c8c8c8",
+        borderColor: '#c8c8c8',
         xaxis: {
           lines: {
             show: true,
@@ -70,7 +69,7 @@ function CategoryChart() {
       xaxis: {
         //카테고리: categoryCounts데이터의 검색어
         categories: categoryCountArray.map((data) => {
-          return "#" + data.name;
+          return '#' + data.name;
         }),
         labels: {
           formatter: function (val: string) {
@@ -98,7 +97,7 @@ function CategoryChart() {
       tooltip: {
         y: {
           formatter: function (val: number) {
-            return val + "개";
+            return val + '개';
           },
         },
       },
@@ -107,22 +106,14 @@ function CategoryChart() {
     const series = [
       //차트: categoryCounts데이터의 검색 횟수
       {
-        name: "태그 개수",
+        name: '태그 개수',
         data: categoryCountArray.map((data) => {
           return data.count;
         }),
       },
     ];
 
-    return (
-      <ReactApexChart
-        type="bar"
-        options={option}
-        series={series}
-        width={"160%"}
-        height={320}
-      />
-    );
+    return <ReactApexChart type='bar' options={option} series={series} width={'160%'} height={320} />;
   } else {
     return null;
   }

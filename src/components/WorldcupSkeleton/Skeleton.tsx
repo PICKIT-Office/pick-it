@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "../../assets/skeleton/skeleton.scss";
+import React, { useEffect, useState } from 'react';
+import '../../assets/skeleton/skeleton.scss';
 
 const Skeleton = () => {
   const [skeletonUILength, setSkeletonUILength] = useState<number[]>([]);

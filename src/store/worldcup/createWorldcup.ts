@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { CreateWorldCup } from "../../types/Worldcup";
+import { createSlice } from '@reduxjs/toolkit';
+import { CreateWorldCup } from '../../types/Worldcup';
 
 const initialState: CreateWorldCup = {
-  worldcupTitle: "",
-  worldcupDescription: "",
+  worldcupTitle: '',
+  worldcupDescription: '',
   tournamentRange: 0,
   category: [],
   pageStep: 1,
 };
 
 const createWorldcupSlice = createSlice({
-  name: "createWorldcup",
+  name: 'createWorldcup',
   initialState,
   reducers: {
     // step1 클라이언트에서 사용자 입력값을 넘겨받은 후 월드컵 제목, 설명 데이터 업데이트
@@ -20,7 +20,7 @@ const createWorldcupSlice = createSlice({
     },
     // step1 입력값의 올바른 저장을 확인 후 다음 pageStep값을 2로 증가시키는 함수
     scrollStep2: (state, action) => {
-      if (state.worldcupTitle !== "" && state.worldcupDescription !== "") {
+      if (state.worldcupTitle !== '' && state.worldcupDescription !== '') {
         state.pageStep = action.payload;
       }
     },
@@ -36,7 +36,7 @@ const createWorldcupSlice = createSlice({
       }
     },
     // 월드컵 생성이 끝나면 초기값으로 되돌리기
-    getReset: () => initialState
+    getReset: () => initialState,
   },
 });
 

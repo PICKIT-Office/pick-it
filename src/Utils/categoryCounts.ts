@@ -1,4 +1,4 @@
-import { ICharts } from "../types/Banner";
+import { ICharts } from '../types/Banner';
 
 export const categoryCounts = (array: string[]) => {
   //reduce메소드를 사용하여 배열 순회하여 새로운 배열을 반환
@@ -16,7 +16,7 @@ export const categoryCounts = (array: string[]) => {
       return acc;
     }, [])
     //카운트 내림차순 정렬 후 7개 데이터만 추출
-    .sort((a, b) => b.count - a.count)
+    .sort((a, b) => b.count - a.count);
 
   return categoryCounter;
 };

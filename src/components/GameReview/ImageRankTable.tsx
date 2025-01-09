@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ImageRankData } from "../../types/Worldcup";
+import React, { useState } from 'react';
+import { ImageRankData } from '../../types/Worldcup';
 
 function ImageRankTable(props: {
   allImg: {
@@ -16,9 +16,7 @@ function ImageRankTable(props: {
   const mergedData = props.allImg
     .map((aData) => {
       //기존 이미지 데이터에서 우승횟수를 추가시키기 위함. 같은 파일경로를 같는 데이터에 우승 횟수 추가, 없으면 0
-      const findWinRate = props.imgRankData.find(
-        (iData) => iData.filePath === aData.filePath
-      )?.winRate;
+      const findWinRate = props.imgRankData.find((iData) => iData.filePath === aData.filePath)?.winRate;
       return {
         fileIndex: aData.fileIndex,
         fileName: aData.fileName,
@@ -41,8 +39,8 @@ function ImageRankTable(props: {
   };
 
   return (
-    <section className="game-review-rank">
-      <table className="review-rank-table">
+    <section className='game-review-rank'>
+      <table className='review-rank-table'>
         <thead>
           <tr>
             <td>순위</td>
@@ -54,19 +52,19 @@ function ImageRankTable(props: {
         <tbody>
           {mergedData.slice(0, limit).map((data, index) => (
             <tr key={data.fileIndex}>
-              <td>{data.winRate === 0 ? "-" : index + 1}</td>
+              <td>{data.winRate === 0 ? '-' : index + 1}</td>
               <td>
-                <img src={data.filePath} alt="" />
+                <img src={data.filePath} alt='' />
               </td>
               <td>{data.fileName}</td>
               <td>
                 {data.winRate === 0 ? (
-                  "우승 기록이 없습니다."
+                  '우승 기록이 없습니다.'
                 ) : (
                   <div
-                    className="percentage-graph"
+                    className='percentage-graph'
                     style={{
-                      width: `${getPercentage(data.winRate)}%`
+                      width: `${getPercentage(data.winRate)}%`,
                     }}
                   >
                     {data.winRate}
@@ -78,7 +76,7 @@ function ImageRankTable(props: {
         </tbody>
       </table>
       {limit < mergedData.length && (
-        <div className="more-rank">
+        <div className='more-rank'>
           <button onClick={() => setLimit((prev) => prev + 4)}>더보기</button>
         </div>
       )}
