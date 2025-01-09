@@ -1,0 +1,42 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: jungwook3176/pick-it
+          stage: master
+          yaml: |
+            name: pick-it
+            app: web
+            options:
+              nodeversion: "20"
+              build: npm run build
+              spa: true
+              buildenv:
+                - name: REACT_APP_FIREBASE_API_KEY
+                  value: AIzaSyCtT5_37MKcaVqc6DB3F4_LFESIfupUkIs
+                - name: REACT_APP_FIREBASE_APP_ID
+                  value: 1:112779571813:web:a06c33b8eb8cba87570c8c
+                - name: REACT_APP_FIREBASE_MEASUREMENT_ID
+                  value: G-C61R9HR79W
+              rewrites: []
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
+              preset: react
